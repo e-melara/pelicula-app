@@ -1,16 +1,6 @@
-# peliculas
+# Claves para api themoviedb.org
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Clave de la API: d5ef83e1e4bdb957f0e26adec67c7148
+ejemplo de API: https://api.themoviedb.org/3/movie/550?api_key=d5ef83e1e4bdb957f0e26adec67c7148
+Token de acceso de lectura a la API (v4 auth):
+eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNWVmODNlMWU0YmRiOTU3ZjBlMjZhZGVjNjdjNzE0OCIsInN1YiI6IjVmMjliOTMyNDM1YWJkMDAzNTgwNjJkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CXjZs7KEJC4rWbCjvVZ-6Wtsb5LRfe5SUOGvsZu6Y-c
