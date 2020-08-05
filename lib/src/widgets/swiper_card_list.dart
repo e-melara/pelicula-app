@@ -21,7 +21,6 @@ class SwiperCardList extends StatelessWidget {
         itemCount: this.peliculas.length,
         itemBuilder: (BuildContext context, int index) {
           final src = this.peliculas[index].getPosterImg();
-          print(src);
           return ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: FadeInImage(
