@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/src/providers/pelicula_provider.dart';
 import 'package:peliculas/src/widgets/swiper_card_list.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  final provider = new PeliculaProvider();
 
   @override
   Widget build(BuildContext context) {
-    final swiperTarjetas = SwiperCardList(peliculas: [1, 2, 3, 4, 5]);
+    final swiperTarjetas = FutureBuilder(
+      future: provider.getEnCines(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return SwiperCardList(peliculas: snapshot.data);
+        } else {
+          return Container(
+            height: 400.0,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
+    );
 
     return Scaffold(
       appBar: AppBar(

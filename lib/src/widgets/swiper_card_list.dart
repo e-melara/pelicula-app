@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:peliculas/src/models/pelicula.dart';
 
 class SwiperCardList extends StatelessWidget {
-  final List<dynamic> peliculas;
+  final List<Pelicula> peliculas;
 
   const SwiperCardList({Key key, this.peliculas}) : super(key: key);
 
@@ -19,10 +20,14 @@ class SwiperCardList extends StatelessWidget {
         layout: SwiperLayout.STACK,
         itemCount: this.peliculas.length,
         itemBuilder: (BuildContext context, int index) {
-          final src = "http://via.placeholder.com/350x150";
+          final src = this.peliculas[index].getPosterImg();
+          print(src);
           return ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
-            child: Image.network(src, fit: BoxFit.fill),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/img/no-image.jpg'),
+              image: NetworkImage(src),
+            ),
           );
         },
       ),
