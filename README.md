@@ -1,3 +1,7 @@
+# Aplicacion de Api con themoviedb
+
+Ejemplo de aplicacion movil con flutter, peliculaApp
+
 # Claves para api themoviedb.org
 
 Clave de la API: d5ef83e1e4bdb957f0e26adec67c7148
