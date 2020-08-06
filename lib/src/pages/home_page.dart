@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/src/models/pelicula.dart';
 import 'package:peliculas/src/widgets/movie_horizontal.dart';
 
 import 'package:peliculas/src/widgets/swiper_card_list.dart';
@@ -9,6 +10,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    provider.getPopulares();
+
     final swiperTarjetas = FutureBuilder(
       future: provider.getEnCines(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -37,18 +40,22 @@ class HomePage extends StatelessWidget {
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
-          FutureBuilder(
-            future: provider.getPopulares(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
+          StreamBuilder(
+            stream: provider.ppStream,
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
               if (snapshot.hasData) {
-                return MovieHorizontal(peliculas: snapshot.data);
+                return MovieHorizontal(
+                  peliculas: snapshot.data,
+                  siguiente: provider.getPopulares,
+                );
               } else {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               }
             },
-          )
+          ),
         ],
       ),
     );
