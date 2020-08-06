@@ -20,15 +20,32 @@ class SwiperCardList extends StatelessWidget {
         layout: SwiperLayout.STACK,
         itemCount: this.peliculas.length,
         itemBuilder: (BuildContext context, int index) {
-          final src = this.peliculas[index].getPosterImg();
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: FadeInImage(
-              placeholder: AssetImage('assets/img/no-image.jpg'),
-              image: NetworkImage(src),
-            ),
-          );
+          return SwipperItem(item: this.peliculas.elementAt(index));
         },
+      ),
+    );
+  }
+}
+
+class SwipperItem extends StatelessWidget {
+  final Pelicula item;
+  const SwipperItem({@required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    final src = item.getPosterImg();
+    item.uniqueId = "${item.id}-tarjeta";
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, "detalle", arguments: item);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
+        child: FadeInImage(
+          placeholder: AssetImage('assets/img/no-image.jpg'),
+          image: NetworkImage(src),
+        ),
       ),
     );
   }
