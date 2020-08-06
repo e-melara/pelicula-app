@@ -25,15 +25,26 @@ class PeliculaProvider {
   _getListPelicula({
     String urlString,
     int page = 1,
+    String query = '',
   }) async {
     final url = Uri.https(_url, urlString, {
       'api_key': _apiKey,
       'language': _language,
       'page': page.toString(),
+      'query': query,
     });
 
     final resp = await http.get(url);
     return json.decode(resp.body);
+  }
+
+  Future<List<Pelicula>> searchMovie(String query) async {
+    final decodedData = await this._getListPelicula(
+      urlString: '3/search/movie',
+      query: query,
+    );
+    final peliculas = Peliculas.fromJsonList(decodedData['results']);
+    return peliculas.items;
   }
 
   Future<List<Pelicula>> getEnCines() async {
