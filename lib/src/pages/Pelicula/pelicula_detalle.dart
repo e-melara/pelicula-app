@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/models/pelicula.dart';
+import 'package:peliculas/src/pages/Pelicula/widgets/actors_page_list.dart';
+import 'package:peliculas/src/providers/pelicula_provider.dart';
 
 class PeliculaDetalle extends StatelessWidget {
-  const PeliculaDetalle({Key key}) : super(key: key);
+  PeliculaProvider provider = PeliculaProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class PeliculaDetalle extends StatelessWidget {
           SizedBox(width: 20.0),
           Flexible(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   item.title,
@@ -83,6 +86,22 @@ class PeliculaDetalle extends StatelessWidget {
       ),
     );
 
+    final providerActors = FutureBuilder(
+      future: provider.getCast(item.id.toString()),
+      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        if (snapshot.hasData) {
+          return ActorsPageList(actors: snapshot.data);
+        } else {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
+    );
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -95,6 +114,7 @@ class PeliculaDetalle extends StatelessWidget {
               description,
               description,
               description,
+              providerActors,
             ]),
           ),
         ],
